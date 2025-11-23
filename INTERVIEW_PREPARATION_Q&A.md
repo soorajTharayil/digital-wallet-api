@@ -19,6 +19,13 @@
 
 ### Q1: Can you explain the overall architecture of this Digital Wallet API?
 
+The Digital Wallet API is built using Laravel’s standard structure. I’ve organized the project so that each part has a clear responsibility.
+Models handle the database, controllers handle API requests, and services contain the main business logic like transactions or fraud checks.
+I’ve also used middleware for things like authentication and rate-limiting.
+Overall, the system is clean, modular, and easy to maintain because every layer has its own job
+
+
+
 **Answer:**
 The Digital Wallet API follows Laravel's MVC (Model-View-Controller) architecture pattern, adapted for a RESTful API:
 

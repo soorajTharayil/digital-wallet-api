@@ -13,10 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
         RouteServiceProvider::class,
     ])
     ->withRouting(
+        web: __DIR__ . '/../routes/web.php',
         api: __DIR__ . '/../routes/api.php',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'web.auth' => \App\Http\Middleware\WebAuthMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         // Helper function to check if request is for API
