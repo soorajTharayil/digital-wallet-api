@@ -6,9 +6,13 @@ use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/run-migration', function () {
-    Artisan::call('migrate', ['--force' => true]);
-    return response()->json(['message' => 'migrations done']);
+Route::get('/run-migrate', function () {
+    try {
+        Artisan::call('migrate', ['--force' => true]);
+        return response()->json(['message' => 'Migrations executed successfully']);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
 });
 
 Route::post('/register', [AuthController::class, 'register']);
