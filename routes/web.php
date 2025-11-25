@@ -4,6 +4,7 @@ use App\Http\Controllers\Web\AuthController as WebAuthController;
 use App\Http\Controllers\Web\WalletController as WebWalletController;
 use App\Http\Controllers\Web\TransactionController as WebTransactionController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 // Public routes
 Route::get('/register', [WebAuthController::class, 'showRegister'])->name('register.show');
@@ -35,4 +36,10 @@ Route::middleware(['web.auth'])->group(function () {
 Route::get('/', function () {
     return session('jwt_token') ? redirect()->route('dashboard') : redirect()->route('login.show');
 })->name('home');
+
+// Temporary migration route (REMOVE AFTER USE)
+Route::get('/run-migrate', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    return "Migrations executed!";
+});
 
