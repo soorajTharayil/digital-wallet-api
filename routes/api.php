@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/run-migrate', function () {
     try {
         Artisan::call('migrate', ['--force' => true]);
-        return response()->json(['message' => 'Migrations executed successfully']);
+        return response()->json(['message' => 'migrations done']);
     } catch (\Exception $e) {
         return response()->json(['error' => $e->getMessage()], 500);
     }
